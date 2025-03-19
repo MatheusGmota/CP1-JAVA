@@ -6,4 +6,10 @@ public class Pleno extends Funcionario{
         super(id, nome, valorHora, horasTrab, salario, cargo);
     }
 
+    @Override
+    public void calcularSalario(){
+        double bonus = (this.horasTrab/15) * 300;
+        this.salario = (this.horasTrab * this.valorHora)+ bonus;
+    }
+
 }

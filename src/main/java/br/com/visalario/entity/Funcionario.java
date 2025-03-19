@@ -2,17 +2,17 @@ package br.com.visalario.entity;
 
 public abstract class Funcionario {
 
-    private Integer id;
+    protected Integer id;
 
-    private String nome;
+    protected String nome;
 
-    private double horasTrab;
+    protected double horasTrab;
 
-    private double valorHora;
+    protected double valorHora;
 
-    private double salario;
+    protected double salario;
 
-    private String cargo;
+    protected String cargo;
 
     public Funcionario(Integer id, String nome, double valorHora, double horasTrab, double salario, String cargo) {
         this.id = id;

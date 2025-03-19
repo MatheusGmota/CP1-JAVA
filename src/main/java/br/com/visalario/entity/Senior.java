@@ -6,4 +6,10 @@ public class Senior extends Funcionario{
         super(id, nome, valorHora, horasTrab, salario, cargo);
     }
 
+    @Override
+    public void calcularSalario(){
+        double bonus = (this.horasTrab/15) * 400;
+        this.salario = (this.horasTrab * this.valorHora)+ bonus;
+    }
+
 }
