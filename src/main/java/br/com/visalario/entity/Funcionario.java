@@ -37,6 +37,11 @@ public abstract class Funcionario {
         this.salario = this.horasTrab * this.valorHora;
     }
 
+    @Override
+    public String toString() {
+        return this.id+","+this.cargo +", "+ this.nome +", "+ this.horasTrab +", "+ this.valorHora +", "+ this.salario;
+    }
+
     public void imprimirInformacao(){
         System.out.println("Nome: " + this.nome +
                  ", Cargo: " + this.cargo
