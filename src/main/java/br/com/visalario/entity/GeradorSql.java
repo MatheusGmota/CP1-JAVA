@@ -7,32 +7,40 @@ import java.lang.reflect.Field;
 
 public class GeradorSql {
 
-    private String sql = "";
-
+    // Método retorna uma string do sql e imprime na tela
     public String gerarSqlInsert(Object o) {
-        //Método retorna uma string do sql e imprime na tela
+
         Class<?> clazz = o.getClass();
         StringBuilder campos = new StringBuilder("(");
+        StringBuilder values = new StringBuilder(" VALUES(");
 
+        // Recuperando annotations Tabela e Coluna presentes na classe
         Tabela nomeTabela = clazz.getSuperclass().getAnnotation(Tabela.class);
         Field[] fields = clazz.getSuperclass().getDeclaredFields();
-        for(Field field : fields) {
-            Coluna annt = field.getAnnotation(Coluna.class);
+
+        for(int i = 0; i < fields.length; i++) {
+            Coluna annt = fields[i].getAnnotation(Coluna.class);
             if (annt != null) {
-                campos.append(annt.nome()).append(",");
+                campos.append(annt.nome());
+                if (i + 1 != fields.length) campos.append(",");
+                else campos.append(")");
             }
+            values.append("?").append(",");
         }
 
-        campos.deleteCharAt(campos.length() -1);
-        this.sql = "INSERT INTO " + nomeTabela.nome() + campos + ")" + " VALUES(" + o.toString() + ")";
+        // Inicializando stringBuilder do comando SQL
+        StringBuilder sql = new StringBuilder("INSERT INTO ");
+        sql.append(nomeTabela.nome()).append(campos);
+        sql.append(values).replace(sql.length() -1, sql.length(),")");
+
         System.out.println(sql);
-        return sql;
+        return sql.toString();
     }
 
+    //Método retorna uma string de comando update sql e imprime na tela
     public String gerarSqlUpdate(Object o) {
-        //Método retorna uma string do sql e imprime na tela
+        // implementar metodo...
         return "";
-
     }
 
 }
