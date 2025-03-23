@@ -15,7 +15,8 @@ public class Teste {
         EntityManager em = fabrica.createEntityManager();
         FuncionarioDao funcionarioDao = new FuncionarioDaoImpl(em);
 
-        Senior jose = new Senior(1, "José", 20, 160, 3200,"Senior" );
+        Senior jose = new Senior(1, "José", 20, 160, "Senior" );
+        jose.calcularSalario();
 
         try {
             funcionarioDao.criar(jose);
