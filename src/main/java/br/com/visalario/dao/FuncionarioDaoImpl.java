@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 public class FuncionarioDaoImpl implements FuncionarioDao {
 
-    private EntityManager em;
+    private final EntityManager em;
 
     public FuncionarioDaoImpl(EntityManager em) {
         this.em = em;
@@ -16,12 +16,12 @@ public class FuncionarioDaoImpl implements FuncionarioDao {
     private void criarTabela() {
         em.getTransaction().begin();
         String sql = "CREATE TABLE TB_FUNCIONARIO (" +
-                 "id INTEGER NOT NULL," +
-                 "nome VARCHAR2(100)," +
-                 "cargo VARCHAR2(100)," +
-                 "horas_trabalhadas NUMERIC(5, 2)," +
-                 "salario NUMERIC(10, 2)," +
-                 "bonus NUMERIC(10, 2)" +
+                 "id_func INTEGER NOT NULL," +
+                 "cargo_func VARCHAR2(100)," +
+                 "nome_func VARCHAR2(100)," +
+                 "horas_trab NUMBER(5, 2)," +
+                 "valor_hr_func NUMBER(10, 2)," +
+                 "salario_func NUMBER(10, 2)" +
                  ")";
 
         em.createNativeQuery(sql).executeUpdate();
@@ -31,19 +31,26 @@ public class FuncionarioDaoImpl implements FuncionarioDao {
     }
 
     public void criar(Funcionario funcionario) {
+        em.getTransaction().begin();
         String sqlCreate = new GeradorSql().gerarSqlInsert(funcionario);
 
-        em.createQuery(sqlCreate).executeUpdate();
+        em.createNativeQuery(sqlCreate)
+                .setParameter(1, funcionario.getId())
+                .setParameter(2, funcionario.getCargo())
+                .setParameter(3, funcionario.getNome())
+                .setParameter(4, funcionario.getHorasTrab())
+                .setParameter(5, funcionario.getValorHora())
+                .setParameter(6, funcionario.getSalario())
+                .executeUpdate();
     }
 
     public void atualizar(Funcionario funcionario) {
         String sqlCreate = new GeradorSql().gerarSqlUpdate(funcionario);
-        em.persist(funcionario);
+        // implementar metodo...
     }
 
     public void commit() throws CommitException {
         try{
-            em.getTransaction().begin();
             em.getTransaction().commit();
         } catch (Exception e){
             e.printStackTrace();
