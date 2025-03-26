@@ -8,6 +8,6 @@ public class TesteGeradorSql {
         Senior jose = new Senior(1, "José", 20, 160, "Senior" );
         jose.calcularSalario();
 
-        new GeradorSql().gerarSqlInsert(jose);
+        new GeradorSql().gerarTabela(jose);
     }
 }
