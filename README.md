@@ -22,3 +22,8 @@
 
 ![image](https://github.com/user-attachments/assets/d377166e-d85e-4c16-85cd-426569262aa1)
 ![image](https://github.com/user-attachments/assets/7f4cdf9b-e742-4c80-88e3-7f214bbfbf01)
+<p>Annotations criadas para ajudar a persistencia dos dados no banco</p>
+
+![image](https://github.com/user-attachments/assets/1ed5fa08-b43c-443a-9394-776ca38995f0)
+<p>Teste de criação de um objeto no banco de dados</p>
+
