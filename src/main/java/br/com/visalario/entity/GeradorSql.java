@@ -33,14 +33,7 @@ public class GeradorSql {
         sql.append(nomeTabela.nome()).append(campos);
         sql.append(values).replace(sql.length() -1, sql.length(),")");
 
-        System.out.println(sql);
         return sql.toString();
-    }
-
-    //Método retorna uma string de comando update sql e imprime na tela
-    public String gerarSqlUpdate(Object o) {
-        // implementar metodo...
-        return "";
     }
 
     public String gerarTabela(Object o) {
@@ -55,10 +48,10 @@ public class GeradorSql {
         for(int i = 0; i < fields.length; i++){
             Coluna coluna = fields[i].getAnnotation(Coluna.class);
             if(coluna.tamanho() != 255) {
+                campos.append(coluna.nome()).append(" VARCHAR2(").append(coluna.tamanho()).append("),");
+            } else if(coluna.precisao() != 0){
                 String string = coluna.precisao() + "," + coluna.escala();
                 campos.append(coluna.nome()).append(" NUMBER(").append(string).append("),");
-            } else if(coluna.precisao() != 0){
-                campos.append(coluna.nome()).append(" VARCHAR2(").append(coluna.tamanho()).append("),");
             } else {
                 campos.append(coluna.nome()).append(" INTEGER NOT NULL,");
             }

@@ -19,6 +19,13 @@ public class Teste {
         jose.calcularSalario();
 
         try {
+            funcionarioDao.criarTabela(jose);
+            funcionarioDao.commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
             funcionarioDao.criar(jose);
             funcionarioDao.commit();
         } catch (Exception e) {

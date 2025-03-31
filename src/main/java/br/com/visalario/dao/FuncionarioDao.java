@@ -5,6 +5,6 @@ import br.com.visalario.exceptions.CommitException;
 
 public interface FuncionarioDao {
     void criar(Funcionario funcionario);
-    void atualizar(Funcionario funcionario);
+    void criarTabela(Funcionario funcionario);
     void commit() throws CommitException;
 }
